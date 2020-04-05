@@ -6,7 +6,7 @@ Chris Eley
 */
 
 #define LEDPin 13
-#define ButtonPin 5
+#define ButtonPin 12
 
 const uint32_t debouncetime_ms = 150;
 
@@ -17,7 +17,7 @@ uint32_t ButtonCount = 0;
 
 
 void setup() {                                                         
-  Serial.begin(9600);             //initialises serial interface and sets Baud rate (115200) 
+  Serial.begin(115200);             //initialises serial interface and sets Baud rate (115200) 
   pinMode(LEDPin, OUTPUT);
   pinMode(ButtonPin, INPUT_PULLUP);
 }
@@ -35,7 +35,7 @@ void loop() {
     digitalWrite(LEDPin, LEDState);
     Serial.print("LEDState =");
     Serial.println(LEDState);
-    //ButtonCount = (ButtonCount + 1);         //either add to buttoncount this way or us ++ButtonCount
+    //ButtonCount = (ButtonCount + 1);         //either add to buttoncount this way or use ++ButtonCount
     Serial.print("ButtonCount =");
     Serial.println(++ButtonCount);
     PrevTime_ms = CurrTime_ms;
