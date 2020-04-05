@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "Blink without delay"
+		},
+		{
+			"path": "BlinkHelloWorld"
+		},
+		{
+			"path": "Flicker Fusion"
+		},
+		{
+			"path": "Interrupt test"
+		},
+		{
+			"path": "Serial Write test"
+		}
+	],
+	"settings": {}
+}
