@@ -14,6 +14,10 @@
 		},
 		{
 			"path": "Serial Write test"
+		},
+		{
+			"name": "Integer Representation Test",
+			"path": "..\\Integer Representation Test"
 		}
 	],
 	"settings": {}

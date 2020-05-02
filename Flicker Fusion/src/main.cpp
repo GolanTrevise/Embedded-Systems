@@ -16,7 +16,7 @@ uint8_t PrevButtonState = LOW;
 uint32_t ButtonCount = 0;
 
 
-void setup() {                                                         
+void setup() {
   Serial.begin(115200);             //initialises serial interface and sets Baud rate (115200) 
   pinMode(LEDPin, OUTPUT);
   pinMode(ButtonPin, INPUT_PULLUP);
