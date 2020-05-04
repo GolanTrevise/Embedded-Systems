@@ -18,6 +18,26 @@
 		{
 			"name": "Integer Representation Test",
 			"path": "..\\Integer Representation Test"
+		},
+		{
+			"name": "Button Debounce",
+			"path": "..\\Button Debounce"
+		},
+		{
+			"name": "Tone test",
+			"path": "..\\Tone test"
+		},
+		{
+			"name": "Analogue Read",
+			"path": "..\\Analogue Read"
+		},
+		{
+			"name": "D2A conversion",
+			"path": "..\\D2A conversion"
+		},
+		{
+			"name": "FloatingPointTest",
+			"path": "..\\FloatingPointTest"
 		}
 	],
 	"settings": {}
