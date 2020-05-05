@@ -1,47 +1,50 @@
 #include <Arduino.h>
 
-/*
-Flicker Fusion 2020
-Chris Eley
-*/
+#define led 13
+#define ledPin 6
+#define buttonPin 12
 
-#define LEDPin 13
-#define ButtonPin 12
+//function prototype
+void ISR_Button();
 
-const uint32_t debouncetime_ms = 150;
+void setup()
+{                
+  Serial.begin(115200);
+  pinMode(ledPin, OUTPUT);
+  digitalWrite(ledPin, LOW);
+  attachInterrupt(buttonPin, ISR_Button, FALLING);
 
-uint8_t LEDState = false;
-uint8_t CurrButtonState = LOW;
-uint8_t PrevButtonState = LOW;
-uint32_t ButtonCount = 0;
-
-
-void setup() {
-  Serial.begin(115200);             //initialises serial interface and sets Baud rate (115200) 
-  pinMode(LEDPin, OUTPUT);
-  pinMode(ButtonPin, INPUT_PULLUP);
+  
 }
 
-void loop() {
-  static uint32_t PrevTime_ms = 0;
-  uint32_t        CurrTime_ms = millis();
+int32_t freq;
 
-  CurrButtonState = !digitalRead(ButtonPin);
+void loop()                     
+{
+  int32_t val;
   
-  //detect rising edge and debounce time
-  if((CurrButtonState == HIGH) && (PrevButtonState == LOW) && (CurrTime_ms - PrevTime_ms > debouncetime_ms)) {
-    //toggle LED
-    LEDState = !LEDState; 
-    digitalWrite(LEDPin, LEDState);
-    Serial.print("LEDState =");
-    Serial.println(LEDState);
-    //ButtonCount = (ButtonCount + 1);         //either add to buttoncount this way or use ++ButtonCount
-    Serial.print("ButtonCount =");
-    Serial.println(++ButtonCount);
-    PrevTime_ms = CurrTime_ms;
-  }
-  
-  PrevButtonState = CurrButtonState;
-  
+  static uint32_t prevMicros = 0;
 
+  
+  
+  val = analogRead(0);
+  freq = val/4;
+  /*Serial.print("analog 0 is: ");
+  Serial.println(val);
+  Serial.print("Freq is: ");
+  Serial.print(freq);
+  Serial.println("Hz");*/
+  analogWriteFrequency(ledPin, freq);
+  analogWrite(ledPin, 123);
+  //while((micros() - prevMicros) <= 100){  }
+  delay(100);
+  prevMicros = micros();
+  
 }
+
+void ISR_Button(){
+  Serial.print("Freq is: ");
+  Serial.print(freq);
+  Serial.println("Hz");
+}
+
