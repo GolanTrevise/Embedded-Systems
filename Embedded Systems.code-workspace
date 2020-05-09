@@ -38,6 +38,10 @@
 		{
 			"name": "FloatingPointTest",
 			"path": "..\\FloatingPointTest"
+		},
+		{
+			"name": "Flicker Fusion 2",
+			"path": "..\\Flicker Fusion 2"
 		}
 	],
 	"settings": {}
