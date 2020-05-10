@@ -31,10 +31,13 @@ When the push button is depressed and released the program enters the interrupt 
 This project uses the built-in LED, however if a seperate LED was used a current limiting resistor would be required. To calculate this we need the system voltage (VCC), LED forward voltage, LED forward current. These can be obtained from relevant datasheets. Here is an example.
 [LED datasheet](Documentation/Datasheets/element14_1003210_LED.pdf)
 ![calc](Documentation/Images/CLRcalc.PNG)
+
 And then we must round up to the next standard resistor size, in this case 82 ohms.
 
 
 ## 4. Results
+
+![Freq check](Documentation/Images/FreqCheck.png)
 
 The resulting device successfully completes its task and the frequency readout is accurate over the range of expected values (16 – 200 Hz).
 
