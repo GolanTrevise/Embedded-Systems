@@ -1,0 +1,37 @@
+# Ass. 0- Flicker fusion
+
+### By Chris Eley
+
+
+
+## Abstract
+
+The purpose of this project is to build a device that can be used to measure an individual&#39;s &quot;Flicker Fusion Threshold&quot;, this is the frequency when a steadily flickering light appears to become steady for the observer.
+
+## Introduction
+
+Using a Teensy 3.2 Microcontroller I have designed and built a prototype of a Flicker Fusion Threshold measuring device. It uses a potentiometer to allow the user to adjust the rate of flickering of the built in LED, once the user can no longer observe flickering, they press a button and a serial terminal will display the current frequency.
+
+## Methods
+
+To achieve the desired result the potentiometer is connected to an analogue pin which provides a 12 Bit input (0-1023 in decimal) which is multiplied by 30 to give the half period length (in microseconds).
+
+Once the elapsed time reaches the half period length the LED changes state. This gives a 50% on/off cycle for the LED with a variable frequency.
+
+The frequency is calculated by dividing 1000000 by the Period (in microseconds).
+
+When the push button is depressed and released the program enters the interrupt Service Routine (ISR) and performs a debounce check of the button before printing the frequency value on a serial terminal on a connected device.
+
+The Teensy 3.2 has a built in LED as well as internal pull-up resistors but calculations for suitable resistor values for a current limiting resistor and a pull-up resistor are included in the schematic.
+
+## Results
+
+The resulting device successfully completes its task and the frequency readout is accurate over the range of expected values (16 – 200 Hz).
+
+## Discussion
+
+Due to the relationship between frequency and period when the analogue value read by the Teensy is very low there will be large jumps in frequency, to counter this it is important to select the correct multiplier for the analogue value. I found that 30 gives a good balance between still providing a usable low end frequency value (16Hz) and giving good accuracy at the top end. For example if 1 is used as the multiplier the minimum frequency obtainable is 489 Hz, well above the Flicker Fusion Threshold of most humans, and if 50 is used then the usable band only just extends past the range of expected values (by my extensive survey of 7 household members with ages ranging from 6-70 the flicker fusion threshold was from 25-60Hz) before the frequency values start rising too quickly to be accurate.
+
+## Conclusions
+
+In conclusion the device works correctly and for the broad range of humans provides an accurate and reliable indication of their flicker fusion threshold.
