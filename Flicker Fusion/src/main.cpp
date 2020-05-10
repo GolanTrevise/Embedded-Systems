@@ -28,24 +28,33 @@ void setup() {
 // Main Program Loop
 void loop() {
   static uint32_t prevTime_us = 0;                      // Creating a local variable to store the previous time (in micro seconds)
+  uint32_t aRaw;                                        // Creates a variable to store the raw value of the analogue read
   uint32_t Pby2;                                        // A local variable to store the half cycle time of the LED
 
-  Pby2 = (analogRead(0)*30);                            // Reads the value of the 10k potentiometer and multiplies by 30 to get the half cycle time in microseconds
-  freq = (1000000 / (2*Pby2));                          // Calculates and stores the frequency of the LED
+  aRaw = (analogRead(0));                               // Stores the value from the potentiometer
+
+  if (aRaw < 250) {                                     // If the raw value is low (<250) then the Period is set to 20 times the
+  Pby2 = ((aRaw)*10);                                   // value of aRaw
+  } 
+
+   if (aRaw >= 250) {                                   // If the raw value is higher (>=250) then the Period is set to 60 times the
+  Pby2 = (((aRaw - 250)*30) + 2500);                    // value of aRaw   
+  }
 
   if (micros() - prevTime_us >= Pby2) {                 // Checks if the set interval has passed  
     ledState = !ledState;                               // If conditions filled alters state of LED flage
     digitalWrite(ledPin,ledState);                      // Writes the LED flag state to the LED pin.
     prevTime_us = micros();                             // Sets the previous time to the current time to allow the cycle to start again                          
   }
-  
+
+  freq = (1000000 / (2*Pby2));                          // Calculates and stores the frequency of the LED
 }
 
 // Interrupt service routine
 void ISR_Button(){
   static uint32_t prevMillisButton = 0;                 // Creates variable for debouncing inside the ISR 
   uint32_t currMillisButton = millis();                 // Stores current time upon entering ISR
-  uint32_t debounceTime_ms = 20;                        // Sets the debounce time
+  uint32_t debounceTime_ms = 50;                        // Sets the debounce time
     if ((currMillisButton - prevMillisButton) >= debounceTime_ms){    // Debounce check
       prevMillisButton = currMillisButton;              // Syncs the previous time the button was pushed to this button push
       Serial.print("Freq is: ");                        
