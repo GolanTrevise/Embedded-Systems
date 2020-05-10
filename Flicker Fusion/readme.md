@@ -1,4 +1,6 @@
-# Ass. 0- Flicker fusion
+# :sparkle: Ass. 0- Flicker fusion :sparkle:
+
+![prototype](Documentation/Images/Prototype.png)
 
 ### By Chris Eley
 
@@ -16,6 +18,8 @@ Using a Teensy 3.2 Microcontroller I have designed and built a prototype of a Fl
 
 ## 3. Methods
 
+![schematic](Documentation/Images/Schematic.PNG)
+
 To achieve the desired result the potentiometer is connected to an analogue pin which provides a 12 Bit input (0-1023 in decimal) which is either multplied by 10 (if the analogue read is in the lower quarter of possible values, or if higher than this to be multiplied by 30 to give the half period length (in microseconds). The purpose of the two different values is to stop the frequency from suddenly getting much higher for lower values read from the potentiometer. 
 
 Once the elapsed time reaches the half period length the LED changes state. This gives a 50% on/off cycle for the LED with a variable frequency.
@@ -24,7 +28,11 @@ The frequency is calculated by dividing 1000000 by the Period (in microseconds).
 
 When the push button is depressed and released the program enters the interrupt Service Routine (ISR) and performs a debounce check of the button before printing the frequency value on a serial terminal on a connected device.
 
-The Teensy 3.2 has a built in LED but a calculation for suitable resistor value for a current limiting resistor is included in the schematic.
+This project uses the built-in LED, however if a seperate LED was used a current limiting resistor would be required. To calculate this we need the system voltage (VCC), LED forward voltage, LED forward current. These can be obtained from relevant datasheets. Here is an example.
+[LED datasheet](Documentation/Datasheets/element14_1003210_LED.pdf)
+![calc](Documentation/Images/CLRcalc.PNG)
+And then we must round up to the next standard resistor size, in this case 82 ohms.
+
 
 ## 4. Results
 
