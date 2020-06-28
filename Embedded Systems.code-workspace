@@ -42,6 +42,37 @@
 		{
 			"name": "Flicker Fusion 2",
 			"path": "..\\Flicker Fusion 2"
+		},
+		{
+			"name": "Rising and Falling thresholds",
+			"path": "..\\Rising and Falling thresholds"
+		},
+		{
+			"name": "Stopwatch",
+			"path": "..\\Stopwatch"
+		},
+		{
+			"path": "..\\Flappy Bird"
+		},
+		{
+			"name": "FB2",
+			"path": "..\\FB2"
+		},
+		{
+			"name": "ScreeTest",
+			"path": "..\\ScreeTest"
+		},
+		{
+			"name": "Scrolling Pot Test",
+			"path": "..\\Scrolling Pot Test"
+		},
+		{
+			"name": "Non-scroll Pot Test",
+			"path": "..\\Non-scroll Pot Test"
+		},
+		{
+			"name": "Ass. 1- OS FG LA",
+			"path": "..\\Ass. 1- OS FG LA"
 		}
 	],
 	"settings": {}

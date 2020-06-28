@@ -1,7 +1,7 @@
 # :sparkle: Ass. 0- Flicker fusion :sparkle:
 
 ![prototype](Documentation/Images/Prototype.png)
-
+::
 ### By Chris Eley
 
 ## 0. Video Link
