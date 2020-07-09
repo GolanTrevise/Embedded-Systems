@@ -109,15 +109,19 @@ void loop()
   // Start screen state. Prompts user to move to menu screen
   case startScreen:
     
+    // Sets the 2 criteria for state changes- button OR incoming byte
     if((buttonPressed == (true)) or (incomingByte == 65))
     {
+      // if state change criteria detected, resets incoming byte variable and button state and changes mode
       incomingByte = 0;
       buttonPressed = false;
       mode = menuScreen;
     }
+    // checks if serial buffer contains information and reads it if it does
     if (Serial.available() > 0) {
     incomingByte = Serial.read();
     }
+    // moves to start function
     start();
     break;
 
@@ -150,7 +154,7 @@ void loop()
 
     break;
 
-  // Oscilloscope function, displays visual representation of sampled voltage 
+  // Oscilloscope function, moves to oscilloscope function
   case oScope:
     
     if((buttonPressed == true) or (incomingByte == 65))
@@ -201,7 +205,7 @@ void loop()
     fgmenu();
     break;
 
-  // Generated waves, produce desired waveform, display an artistic impression of waveform on screen
+  // Generated wave modes, display an artistic impression of waveform on screen, moves to appropriate function
   case triWave:
 
     if ((buttonPressed == true) or (incomingByte == 67))
@@ -278,8 +282,9 @@ void loop()
     }
     sin();
     break;
-    
-   case logicAn:
+
+  // Move to logic analyser mode  
+  case logicAn:
     if((buttonPressed == true) or (incomingByte == 65))
     {
       incomingByte = 0;
@@ -297,7 +302,9 @@ void loop()
   }
 }
 
+// Functions
 
+// Start screen- displays weelcome message and prompt
 void start(){
   display.clearDisplay();
   display.fillRoundRect(0, 0, 127, 43, 5, SSD1306_WHITE);
@@ -315,6 +322,8 @@ void start(){
   display.print("the Main Menu");
   display.display();
 }
+
+// Menu function- displays menu, updates cursor position according to pot position
 void menu(){
   display.clearDisplay();
   display.setTextSize(2);
@@ -344,6 +353,7 @@ void menu(){
   display.display();
 }
 
+// Oscilloscope function- displays a visual representation and text of sampled voltage
 void scope(){
   
   static uint32_t prevTime_ms = 0;
@@ -390,6 +400,7 @@ void scope(){
   }
 }
 
+// Function Gen. menu- displays options and updates highlighted position based on pot position
 void fgmenu(){
   display.clearDisplay();
   display.setTextSize(1);
@@ -421,6 +432,8 @@ void fgmenu(){
     
   display.display();
 }
+
+// Generated wave functions- output desired waveform from pin 14
 void tri(){
   static uint16_t previ = 0;
 
@@ -467,6 +480,7 @@ void sin(){
   Serial.println(analogRead((float)ADCPin));
 }
 
+// Display logic analyser placeholder screen
 void analyse(){
   display.clearDisplay();
   display.setTextSize(1);
@@ -479,6 +493,7 @@ void analyse(){
 }
 
 
+// Interrupt function used to debounce the button
 void ISRButtonPressed()
 {
   noInterrupts();
