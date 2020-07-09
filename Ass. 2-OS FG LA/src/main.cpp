@@ -1,18 +1,25 @@
-#include <Arduino.h>                                                                              //Including all required libraries
+/* Multifunction Device
+
+By Chris Eley 2020 */
+//Including all required libraries
+#include <Arduino.h>                                                                              
 #include <Adafruit_SSD1306.h>
 #include <Adafruit_GFX.h>
 #include <Wire.h>
 
-#define SCREEN_WIDTH 128                                                                          //Storing the screen parameters to allow easy recall later
+ //Storing the screen parameters to allow easy recall later
+#define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
 #define OLED_RESET     4
 
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);                         
 
-enum states {startScreen, menuScreen, oScope, funcGen, logicAn, triWave, squWave, sinWave};       //
+//Initialising the differing Machine states
+enum states {startScreen, menuScreen, oScope, funcGen, logicAn, triWave, squWave, sinWave};       
 
 enum states mode;
 
+// Initialising global variables and defining pins
 volatile bool buttonPressed = 0;
 uint32_t debouncedelay_ms = 80;
 int32_t i = 0;
@@ -24,7 +31,7 @@ uint16_t incomingByte = 0;
 #define DACPin A14
 #define ADCPin A1
 
-
+// Bitmap array for sinewave image
 const unsigned char Sinewaveimage [] PROGMEM = {
 	// 'Sinewave, 100x45px
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0x00, 0x00, 
@@ -66,6 +73,7 @@ const unsigned char Sinewaveimage [] PROGMEM = {
 	0x00, 0x00, 0x00, 0x00, 0x1c, 0x00, 0x00, 0x00, 0x00
 };
 
+// Function prototypes
 void start();
 void menu();
 void scope();
@@ -76,6 +84,7 @@ void sin();
 void analyse();
 void ISRButtonPressed();
 
+// Initialising serial communications, I2C communications, and stating pin modes
 void setup() {
   Serial.begin(9600);
   if(!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) { // Address 0x3D for 128x64
@@ -87,14 +96,17 @@ void setup() {
   attachInterrupt(buttonPin, ISRButtonPressed, FALLING);  // interrupt for button
 }
 
+// void loop handles the Finite State Machine state navigation
 void loop()
 {
   switch (mode)
   {
+  // Checks serial buffer for incoming messages
   if (Serial.available() > 0) {
-    // read the incoming byte:
     incomingByte = Serial.read();
   }
+
+  // Start screen state. Prompts user to move to menu screen
   case startScreen:
     
     if((buttonPressed == (true)) or (incomingByte == 65))
@@ -109,6 +121,7 @@ void loop()
     start();
     break;
 
+  // menu screen, allows user to select desired function
   case menuScreen:
     
     if (((buttonPressed == true) & (analogRead(potPin) <= 350)) or (incomingByte == 66))
@@ -136,7 +149,8 @@ void loop()
     
 
     break;
-    
+
+  // Oscilloscope function, displays visual representation of sampled voltage 
   case oScope:
     
     if((buttonPressed == true) or (incomingByte == 65))
@@ -151,6 +165,7 @@ void loop()
     scope();
     break;  
 
+  // Function generator function, allows user to select desired output signal, or return to menu
   case funcGen:
     
     if (((buttonPressed == true) & (analogRead(potPin) <= 250)) or (incomingByte == 68))
@@ -186,6 +201,7 @@ void loop()
     fgmenu();
     break;
 
+  // Generated waves, produce desired waveform, display an artistic impression of waveform on screen
   case triWave:
 
     if ((buttonPressed == true) or (incomingByte == 67))
@@ -368,8 +384,6 @@ void scope(){
   prevTime_ms = millis(); 
   Serial.println((float)volts_mV);
   }
-
-  
 
   if (i >= SCREEN_WIDTH){
     i = 0;
