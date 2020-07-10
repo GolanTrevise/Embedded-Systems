@@ -1,4 +1,4 @@
-![image](https://user-images.githubusercontent.com/53545740/69531029-089bc400-0fd8-11ea-85a4-4274a2c157a9.png)
+![image](documentation/Media/Readme images/Cover sheet ES Ass. 1.png)
 
 # Oscilloscope + Logic Analyser + Function Generator
 **Chris Eley**
@@ -7,6 +7,8 @@
 
 **Embedded systems**
 
+**Video Report Link**
+Link will be here once video is made
 
 ## Requirements
 
