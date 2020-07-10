@@ -120,27 +120,27 @@ This is a further menu that allows the user to select which signal they want to 
 #### Waveform
 The 3 waveforms(triangular, square and sine) all have a similar display, and a representative image of the signal that is being produced. For the purposes of testing there is also functionality to sample the DAC pin and see the output on Serial Plot.
 
-![menu](documentation/images/triwavescreen.png)
+![triwave](documentation/images/triwavescreen.png)
 
-![menu](documentation/images/squwavescreen.png)
+![squwave](documentation/images/squwavescreen.png)
 
-![menu](documentation/images/sinewavescreen.png)
+![sinewave](documentation/images/sinewavescreen.png)
 
-![menu](documentation/images/triwavecode1.png)
+![trwave](documentation/images/Triwavecode1.png)
 
-![menu](documentation/images/triwavecode2.png)
+![triwave](documentation/images/Triwavecode2.png)
 
 #### Logic Analyser
 Unfortunately I did not have sufficient time to complete this function, however a menu item exists which leads the user to a placeholder screen.
 
-![menu](documentation/images/LAscreen.png)
+![LA](documentation/images/LAscreen.png)
 
-![menu](documentation/images/LAcode1.png)
+![LA](documentation/images/LAcode1.png)
 
 #### Interrupt Service Routine
 An interrupt service routine is used to debounce the button and allow the button to be pushed at any time.
 
-![menu](documentation/images/ISRcode1.png)
+![ISR](documentation/images/ISRcode1.png)
 
 
 ### Difficulties
