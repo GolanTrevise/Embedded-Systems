@@ -7,7 +7,8 @@
 **Embedded systems**
 
 **Video Report Link**
-Link will be here once video is made
+[Video Report](https://youtu.be/qCa5K333uCs "Video Report")
+
 
 ## Requirements
 
