@@ -26,20 +26,23 @@ This project used the following components
  * Teensy 3.2
    * Arduino framework
    * Programmed using Visual Studio Code
+
    ![teensy3.2](documentation/images/teensy32.png)
  * SDD1306 128x64 OLED
    * 128x64 Pixels monochrome display
    * I2C protocol
    * Internal Pullup resistors (4.7kohm read from resistor on back)
-   ![ssd1306front](documentation/images/SSD1306front.png)
-   ![ssd1306rear](documentation/images/Pullupresistors.png)
+
+   ![ssd1306front](documentation/images/SSD1306front.png) ![ssd1306rear](documentation/images/Pullupresistors.png)
  * 10k$\Omega$  Potentiometer
    * Menu item navigation
    * Oscilloscope testing
+
    ![pot](documentation/images/pot.png)
  * Push Button
    * Menu item selection
    * Debounced in code using millis()
+
    ![pushbutton](documentation/images/pb.png)
 
 
@@ -62,12 +65,14 @@ Below is the state transition diagram for the device. It has 8 states, a start s
  * Serial input- multiple inputs available
 
 All state transitions can be made by either of the events
+
 ![State transition diagram](documentation/images/FSMFlowchart.png)
 
 
 ## Implementation
 ### Wiring
 The final wiring can be seen in the figure below.
+
 ![wiring](documentation/images/Wiring.png)
 
 ### Program
@@ -79,43 +84,62 @@ In the void loop the various states and the navigation between them are implemen
 
 #### Start Screen
 This state is a "welcome" to the device, It has a title area and a prompt to the user to press the button to advance.
+
 ![start](documentation/images/startscreen.png)
+
 ![start](documentation/images/startcode1.png)
+
 ![start](documentation/images/startcode2.png)
 
 #### Menu Screen
 The menu screen has a title at the top and a list of the 3 available functions. A "cursor" (filled circle) moves up and down with the action of the potentiometer to indicate the users current selection and the button or serial input moves the user to either the desired function or the next menu.
+
 ![menu](documentation/images/menuscreen.png)
+
 ![menu](documentation/images/menucode1.png)
+
 ![menu](documentation/images/menucode2.png)
 
 #### Oscilloscope
 The oscilloscope function reads the potentiometer (or other vriable voltage source) and outputs a continuous line across the screen at the appropriate height to represent the voltage. Text also displays at the top of the screen of the millivolts and sample time. The button or serial input returns the user to the menu screen. The signal is also output via serial communication to a computer based serial plotter.
+
 ![menu](documentation/images/scopescreen.png)
+
 ![menu](documentation/images/scopecode1.png)
+
 ![menu](documentation/images/scopecode2.png)
 
 #### Function Generator Menu
 This is a further menu that allows the user to select which signal they want to generate. The user current selection in this menu is highlighted by inverting the colour in a rectangle surrounding the selection.
+
 ![menu](documentation/images/fgmenuscreen.png)
+
 ![menu](documentation/images/fgmenucode1.png)
 
 
 #### Waveform
 The 3 waveforms(triangular, square and sine) all have a similar display, and a representative image of the signal that is being produced. For the purposes of testing there is also functionality to sample the DAC pin and see the output on Serial Plot.
+
 ![menu](documentation/images/triwavescreen.png)
+
 ![menu](documentation/images/squwavescreen.png)
+
 ![menu](documentation/images/sinewavescreen.png)
+
 ![menu](documentation/images/triwavecode1.png)
+
 ![menu](documentation/images/triwavecode2.png)
 
 #### Logic Analyser
 Unfortunately I did not have sufficient time to complete this function, however a menu item exists which leads the user to a placeholder screen.
+
 ![menu](documentation/images/LAscreen.png)
+
 ![menu](documentation/images/LAcode1.png)
 
 #### Interrupt Service Routine
 An interrupt service routine is used to debounce the button and allow the button to be pushed at any time.
+
 ![menu](documentation/images/ISRcode1.png)
 
 
