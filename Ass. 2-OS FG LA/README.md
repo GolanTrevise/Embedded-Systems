@@ -26,16 +26,21 @@ This project used the following components
  * Teensy 3.2
    * Arduino framework
    * Programmed using Visual Studio Code
+   ![teensy3.2](documentation/images/teensy32.png)
  * SDD1306 128x64 OLED
    * 128x64 Pixels monochrome display
    * I2C protocol
-   * Internal Pullup resistors (4.7k$\Omega$)
+   * Internal Pullup resistors (4.7kohm read from resistor on back)
+   ![ssd1306front](documentation/images/SSD1306front.png)
+   ![ssd1306rear](documentation/images/Pullupresistors.png)
  * 10k$\Omega$  Potentiometer
    * Menu item navigation
    * Oscilloscope testing
+   ![pot](documentation/images/pot.png)
  * Push Button
    * Menu item selection
    * Debounced in code using millis()
+   ![pushbutton](documentation/images/pb.png)
 
 
 ### Libraries
